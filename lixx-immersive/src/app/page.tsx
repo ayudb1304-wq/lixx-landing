@@ -1,12 +1,12 @@
 import Hero from "@/components/sections/Hero";
-import TheAltar from "@/components/sections/TheAltar";
+import TheProductVault from "@/components/sections/TheProductVault";
 import TheLixxClub from "@/components/sections/TheLixxClub";
 
 export default function Home() {
   return (
     <main>
       <Hero />
-      <TheAltar />
+      <TheProductVault />
       <TheLixxClub />
     </main>
   );

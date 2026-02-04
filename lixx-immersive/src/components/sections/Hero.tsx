@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import HeroCrystalCanvas from "@/components/three/HeroCrystalCanvas";
 
 // SVG noise pattern as base64 for film grain effect
 const noiseDataUri = `data:image/svg+xml;base64,${Buffer.from(`
@@ -13,71 +14,12 @@ const noiseDataUri = `data:image/svg+xml;base64,${Buffer.from(`
 </svg>
 `).toString("base64")}`;
 
-// Blob configuration for the three "lights"
-const blobs = [
-    {
-        color: "#FAFF00", // Charge - electric yellow
-        initialX: "-10%",
-        initialY: "10%",
-        size: "50vw",
-        animation: {
-            x: ["-10%", "5%", "-15%", "0%", "-10%"],
-            y: ["10%", "25%", "5%", "20%", "10%"],
-            scale: [1, 1.15, 1.05, 1.1, 1],
-        },
-        duration: 12,
-    },
-    {
-        color: "#B6A6E9", // Zen - lavender
-        initialX: "50%",
-        initialY: "-20%",
-        size: "60vw",
-        animation: {
-            x: ["50%", "40%", "55%", "45%", "50%"],
-            y: ["-20%", "-5%", "-25%", "-10%", "-20%"],
-            scale: [1, 1.1, 1.2, 1.05, 1],
-        },
-        duration: 15,
-    },
-    {
-        color: "#2D1B4E", // Dream - deep purple
-        initialX: "30%",
-        initialY: "60%",
-        size: "70vw",
-        animation: {
-            x: ["30%", "20%", "35%", "25%", "30%"],
-            y: ["60%", "50%", "65%", "55%", "60%"],
-            scale: [1.1, 1, 1.15, 1.05, 1.1],
-        },
-        duration: 18,
-    },
-];
-
 export default function Hero() {
     return (
         <section id="hero" className="relative h-screen w-full overflow-hidden bg-lixx-black">
-            {/* LAYER 1: Gradient Blobs - The Living Smoke */}
+            {/* LAYER 1: WebGL Crystal - Liquid Isomalt */}
             <div className="absolute inset-0" aria-hidden="true">
-                {blobs.map((blob, index) => (
-                    <motion.div
-                        key={index}
-                        className="absolute rounded-full mix-blend-screen"
-                        style={{
-                            background: `radial-gradient(circle, ${blob.color} 0%, transparent 70%)`,
-                            width: blob.size,
-                            height: blob.size,
-                            left: blob.initialX,
-                            top: blob.initialY,
-                            filter: "blur(120px)",
-                        }}
-                        animate={blob.animation}
-                        transition={{
-                            duration: blob.duration,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                        }}
-                    />
-                ))}
+                <HeroCrystalCanvas />
             </div>
 
             {/* LAYER 2: Noise Overlay - The Grit */}

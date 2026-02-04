@@ -138,3 +138,89 @@ html {
 .neon-text {
   text-shadow: 0 0 10px rgba(250, 255, 0, 0.5);
 }
+
+/* ============================================
+   PRODUCT VAULT - Sticky Horizontal Carousel
+   Scoped utilities (vault-*)
+   ============================================ */
+
+.vault-verticalType {
+  font-family: var(--font-bungee), sans-serif;
+  font-weight: 400;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-size: clamp(84px, 14vw, 240px);
+  line-height: 0.85;
+  letter-spacing: 0.08em;
+  opacity: 0.08;
+  filter: blur(0.2px);
+  mix-blend-mode: screen;
+}
+
+.vault-slide.vault-glitch {
+  filter:
+    saturate(1.25) contrast(1.08) drop-shadow(2px 0 0 rgba(255, 0, 90, 0.28)) drop-shadow(-2px 0 0 rgba(0, 255, 255, 0.22));
+  animation: vaultGlitchJitter 260ms steps(2, end) both;
+}
+
+.vault-slide.vault-glitch::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.00) 35%, rgba(255, 255, 255, 0.05)),
+    repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 0 1px, rgba(0, 0, 0, 0) 1px 3px);
+  opacity: 0.16;
+  mix-blend-mode: overlay;
+  animation: vaultScanline 260ms linear both;
+}
+
+.vault-slide.vault-glitch .vault-glitchable {
+  text-shadow:
+    -2px 0 rgba(0, 255, 255, 0.18),
+    2px 0 rgba(255, 0, 90, 0.20),
+    0 0 70px rgba(255, 255, 255, 0.05);
+}
+
+@keyframes vaultGlitchJitter {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  18% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  36% {
+    transform: translate3d(1px, -1px, 0);
+  }
+
+  54% {
+    transform: translate3d(-1px, 1px, 0);
+  }
+
+  72% {
+    transform: translate3d(0, -1px, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes vaultScanline {
+  0% {
+    transform: translate3d(0, -2%, 0);
+    opacity: 0.0;
+  }
+
+  25% {
+    opacity: 0.18;
+  }
+
+  100% {
+    transform: translate3d(0, 2%, 0);
+    opacity: 0.10;
+  }
+}
