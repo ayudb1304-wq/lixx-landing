@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+/* ============================================
+   LIXX IMMERSIVE - Global Styles
+   Bio-Rave Brand Atmosphere
+   ============================================ */
+
+:root {
+  /* Lixx SKU Palette */
+  --lixx-black: #030303;
+  --lixx-charge: #FAFF00;
+  --lixx-zen: #B6A6E9;
+  --lixx-dream: #2D1B4E;
+  --glass-panel: rgba(255, 255, 255, 0.05);
+
+  /* Base colors */
+  --background: #030303;
+  --foreground: #EDEDED;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-lixx-black: var(--lixx-black);
+  --color-lixx-charge: var(--lixx-charge);
+  --color-lixx-zen: var(--lixx-zen);
+  --color-lixx-dream: var(--lixx-dream);
+  --color-glass-panel: var(--glass-panel);
+  --font-display: var(--font-bungee);
+  --font-body: var(--font-outfit);
+}
+
+/* ============================================
+   BASE RESET
+   ============================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Lenis smooth scroll integration */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-outfit), sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* ============================================
+   SELECTION STYLES - Lixx Charge
+   ============================================ */
+
+::selection {
+  background: var(--lixx-charge);
+  color: #000000;
+}
+
+::-moz-selection {
+  background: var(--lixx-charge);
+  color: #000000;
+}
+
+/* ============================================
+   TYPOGRAPHY UTILITIES
+   ============================================ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-bungee), sans-serif;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+/* ============================================
+   SCROLLBAR STYLING - Hidden for cinematic look
+   ============================================ */
+
+html {
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari, Edge */
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+.glass-panel {
+  background: var(--glass-panel);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.neon-glow {
+  box-shadow: 0 0 10px rgba(250, 255, 0, 0.5);
+}
+
+.neon-text {
+  text-shadow: 0 0 10px rgba(250, 255, 0, 0.5);
+}
