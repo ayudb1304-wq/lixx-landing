@@ -4,6 +4,7 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import Globe3D from "@/components/ui/3d-globe";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -67,12 +68,13 @@ export default function PayloadTeardown() {
         0,
       );
 
-      // Layer 1 (Shell) separates upward
-      tl.to(
-        ".pt-layer-shell",
-        { y: -180, scale: 1.04, duration: 0.25, ease: "power2.out" },
-        0.05,
+      tl.fromTo(
+        ".pt-video-wrap",
+        { opacity: 0, scale: 0.96 },
+        { opacity: 1, scale: 1, duration: 0.2, ease: "power2.out" },
+        0.06,
       );
+
       tl.fromTo(
         ".pt-text-shell",
         { x: 120, opacity: 0 },
@@ -80,12 +82,6 @@ export default function PayloadTeardown() {
         0.1,
       );
 
-      // Layer 2 (Core) scales up slightly
-      tl.to(
-        ".pt-layer-core",
-        { scale: 1.08, duration: 0.25, ease: "power2.out" },
-        0.3,
-      );
       tl.fromTo(
         ".pt-text-core",
         { x: 120, opacity: 0 },
@@ -93,40 +89,11 @@ export default function PayloadTeardown() {
         0.35,
       );
 
-      // Layer 3 (Center) separates downward
-      tl.to(
-        ".pt-layer-center",
-        { y: 180, scale: 1.04, duration: 0.25, ease: "power2.out" },
-        0.55,
-      );
       tl.fromTo(
         ".pt-text-center",
         { x: 120, opacity: 0 },
         { x: 0, opacity: 1, duration: 0.2, ease: "power3.out" },
         0.6,
-      );
-
-      // Final pulse on core
-      tl.to(
-        ".pt-layer-core",
-        {
-          boxShadow: "0 0 60px var(--accent-magenta), 0 0 120px var(--accent-magenta)",
-          duration: 0.1,
-          repeat: 1,
-          yoyo: true,
-        },
-        0.82,
-      );
-
-      tl.to(
-        ".pt-layer-center",
-        {
-          boxShadow: "0 0 40px rgba(255,255,255,0.8), 0 0 80px rgba(216,255,31,0.4)",
-          duration: 0.08,
-          repeat: 2,
-          yoyo: true,
-        },
-        0.85,
       );
 
       tl.to(
@@ -157,26 +124,24 @@ export default function PayloadTeardown() {
         </div>
 
         {/* Main content: layers left, text right */}
-        <div className="grid flex-1 grid-cols-1 items-center gap-6 pt-8 md:grid-cols-[1fr_1.2fr] md:gap-0">
-          {/* Exploded lollipop view */}
-          <div className="relative flex flex-col items-center justify-center">
-            {/* Stick line */}
-            <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-gradient-to-b from-white/10 via-white/5 to-transparent" />
-
-            {LAYERS.map((layer, i) => (
-              <div
-                key={layer.id}
-                className={`${layer.layerClass} relative z-10 flex items-center justify-center ${layer.bg} my-2 will-change-transform`}
-                style={{
-                  width: `${280 - i * 40}px`,
-                  height: `${140 - i * 20}px`,
-                }}
-              >
-                <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-black/50 mix-blend-difference">
-                  {layer.tag}
-                </span>
+        <div className="grid flex-1 grid-cols-1 items-center gap-6 pt-8 md:grid-cols-[1.15fr_1fr] md:gap-2">
+          {/* 3D globe */}
+          <div className="relative flex items-center justify-center md:justify-start">
+            <div className="pt-video-wrap relative w-full max-w-[38rem] will-change-transform md:max-w-[44rem]">
+              <div className="relative z-10">
+                <Globe3D
+                  className="h-[420px] w-full md:h-[500px]"
+                  config={{
+                    autoRotateSpeed: 0.45,
+                    showAtmosphere: false,
+                  }}
+                />
               </div>
-            ))}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute left-1/2 top-[72%] z-0 h-[32%] w-[10px] -translate-x-1/2 rounded-full bg-gradient-to-b from-white/85 via-white/65 to-white/25 shadow-[0_0_22px_rgba(255,255,255,0.25)]"
+              />
+            </div>
           </div>
 
           {/* Text reveals stacked on the right */}
